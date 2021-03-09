@@ -35,6 +35,8 @@ function start() {
         movefundo();
         movejogador();
         moveinimigo1();
+        moveinimigo2();
+        moveamigo();
     } //fim da função loop
 
     //movimento do fundo
@@ -77,7 +79,27 @@ function start() {
                 posicaoY = parseInt(Math.random() * 334);
                 $("#inimigo1").css("left", 694);
                 $("#inimigo1").css("top",posicaoY);
-            } //fim do movimento do inimigo 1
-    }
+            } 
+    }//fim do movimento do inimigo 1
+
+    //movimento do inimigo 2
+    function moveinimigo2() {
+        posicaoX = parseInt($("#inimigo2").css("left"));
+        $("#inimigo2").css("left",posicaoX-3);
+
+        if (posicaoX<=0) {
+            $("#inimigo2").css("left", 775);
+        }
+    } //fim do movimento do inimigo 2
+
+    //movimento do amigo
+    function moveamigo() {
+        posicaoX = parseInt($("#amigo").css("left"));
+        $("#amigo").css("left", posicaoX+1);
+
+        if (posicaoX>906) {
+            $ ("#amigo").css("left",0);
+        }
+    } //fim do movimento do amigo
 
 } //fim do jogo
