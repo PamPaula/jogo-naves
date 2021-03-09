@@ -8,6 +8,7 @@ function start() {
     $("#fundoGame").append("<div id='amigo' class='anima3'></div>");
 
     //principais variaveis
+    var podeAtirar = true;
     var jogo = {}
     var velocidade = 5;
     var posicaoY = parseInt(Math.random() * 334);
@@ -37,6 +38,7 @@ function start() {
         moveinimigo1();
         moveinimigo2();
         moveamigo();
+        colisao();
     } //fim da função loop
 
     //movimento do fundo
@@ -67,6 +69,7 @@ function start() {
 
         if (jogo.pressionou[TECLA.D]) {
             //chama função Disparo
+            disparo();
         }
     } //fim do movimento do jogador
 
@@ -101,5 +104,41 @@ function start() {
             $ ("#amigo").css("left",0);
         }
     } //fim do movimento do amigo
+
+    //criando disparo 
+    function disparo() {
+        if (podeAtirar == true) {
+            podeAtirar = false;
+
+            topo = parseInt($("#jogador").css("top"))
+            posicaoX = parseInt($("#jogador").css("left"))
+            tiroX = posicaoX + 190;
+            topoTiro = topo +37;
+            $("#fundoGame").append("<div id='disparo'></div>");
+            $("#disparo").css("top",topoTiro);
+            $("#disparo").css("left",tiroX);
+
+            var tempoDisparo = window.setInterval(executaDisparo, 30);
+        } //fecha podeAtirar
+
+        function executaDisparo() {
+            posicaoX = parseInt($("#disparo").css("left"));
+            $("#disparo").css("left",posicaoX + 15);
+                
+                if (posicaoX > 900) {
+                    window.clearInterval (tempoDisparo);
+                    tempoDisparo = null;
+                    $("#disparo").remove();
+                    podeAtirar = true;
+                }
+        } //fecha função executaDisparo
+    } //fecha função disparo
+
+    //criando colisão de disparo com inimigos
+    function colisao() {
+        var colisao1 = ($("#jogador").collision($("#inimigo1")));
+        //jogador com o inimigo1
+        console.log(colisao1);
+    } //fim da colisão
 
 } //fim do jogo
