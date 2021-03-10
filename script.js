@@ -352,5 +352,12 @@ function start() {
         $("#fundoGame").append("<div id='fim'></div>");
 
         $("#fim").html("<h1> Game Over! </h1><p>Sua pontuação foi: " + "</p>" + "<div id='reinicia' onClick=reiniciaJogo()><h3>Jogar Novamente</h3></div>");
-    }
+    } //fim do game over
 } //fim do jogo
+
+//reiniciar jogo
+function reiniciaJogo() {
+    somGameover.pause();
+    $("#fim").remove();
+    start();
+} //fim do reinicia jogo
